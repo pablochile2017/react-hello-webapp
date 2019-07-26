@@ -1,19 +1,29 @@
 import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
+import { Link } from "react-router-dom";
 import "../../styles/home.scss";
 
 export class Home extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			items: [],
+			isFetch: true
+		};
+	}
+
+	componentDidMount() {
+		fetch("https://swapi.co/api/vehicles/")
+			.then(response => response.json())
+			.then(itemsJson => this.setState({ items: itemsJson.result, isFetch: false }));
+	}
+
 	render() {
-		return (
-			<div className="text-center mt-5">
-				<h1>Hello Rigo!</h1>
-				<p>
-					<img src={rigoImage} />
-				</p>
-				<a href="#" className="btn btn-success">
-					If you see this green button, bootstrap is working
-				</a>
-			</div>
-		);
+		if (this.state.isFetch) {
+			return "Loading...";
+		}
+
+		return this.state.items.map(item => {
+			return <h1 key={index}>{items}</h1>;
+		});
 	}
 }

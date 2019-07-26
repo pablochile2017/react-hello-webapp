@@ -22,11 +22,9 @@ const injectContext = PassedComponent => {
 		}
 
 		componentDidMount() {
-			/**
-			 * EDIT THIS!
-			 * This function is the equivalent to "window.onLoad", it only run once on the entire application lifetime
-			 * you should do your ajax requests or fetch api requests here
-			 **/
+			fetch("https://swapi.co/api/vehicles/")
+				.then(response => response.json())
+				.then(starJson => this.setState({ star: starJson.results }));
 		}
 
 		render() {
