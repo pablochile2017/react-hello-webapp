@@ -22,9 +22,9 @@ const injectContext = PassedComponent => {
 		}
 
 		componentDidMount() {
-			fetch("https://swapi.co/api/vehicles/")
+			fetch("https://swapi.co/api/people/1/")
 				.then(response => response.json())
-				.then(starJson => this.setState({ star: starJson.results }));
+				.then(starJson => this.setState({ sw: starJson.results }));
 		}
 
 		render() {
