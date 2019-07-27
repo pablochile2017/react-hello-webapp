@@ -4,28 +4,43 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 
-export class Home extends React.Component {
+export class Planets extends React.Component {
 	render() {
 		return (
 			<div className="container">
-				<h1>Personajes</h1>
+				<h1>Planets</h1>
 				<table className="table table-hover table-responsive">
 					<thead>
 						<tr>
+							<th scope="col">#</th>
 							<th scope="col">Name</th>
+							<th scope="col">rotation_period</th>
+							<th scope="col">orbital_period</th>
+							<th scope="col">diameter</th>
+							<th scope="col">climate</th>
+							<th scope="col">gravity</th>
+							<th scope="col">terrain</th>
+							<th scope="col">surface_water</th>
+							<th scope="col">population</th>
 						</tr>
 					</thead>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							if ("characters" in store) {
-								return store.characters.map((item, index) => {
+							if ("planets" in store) {
+								return store.planets.map((item, index) => {
 									return (
 										<tbody key={index}>
 											<tr>
-												<Link to={"/" + index}>
-													<th scope="row" />
-													<td>{item.name}</td>
-												</Link>
+												<th scope="row" />
+												<td>{item.name}</td>
+												<td>{item.rotation_period}</td>
+												<td>{item.orbital_period}</td>
+												<td>{item.diameter}</td>
+												<td>{item.climate}</td>
+												<td>{item.gravity}</td>
+												<td>{item.terrain}</td>
+												<td>{item.surface_water}</td>
+												<td>{item.population}</td>
 											</tr>
 										</tbody>
 									);

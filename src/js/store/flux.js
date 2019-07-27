@@ -12,11 +12,6 @@ const getState = ({ getStore, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			],
-			star: [
-				{
-					name: "uno"
-				}
 			]
 		},
 		actions: {

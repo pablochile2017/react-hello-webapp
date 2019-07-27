@@ -22,9 +22,26 @@ const injectContext = PassedComponent => {
 		}
 
 		componentDidMount() {
-			fetch("https://swapi.co/api/people/1/")
-				.then(response => response.json())
-				.then(starJson => this.setState({ sw: starJson.results }));
+			const fetching = [
+				{ url: "https://swapi.co/api/people/?page=1", storePlace: "characters", nextUrl: "nextCharacters" },
+				{ url: "https://swapi.co/api/vehicles/?page=1", storePlace: "vehicles", nextUrl: "nextVehicles" },
+				{ url: "https://swapi.co/api/planets/?page=1", storePlace: "planets", nextUrl: "nextPlanets" }
+			];
+			for (let i in fetching) {
+				fetch(fetching[i].url)
+					.then(resp => resp.json())
+					.then(data => {
+						this.setState({
+							store: {
+								...this.state.store,
+								[fetching[i].storePlace]: data.results,
+								[fetching[i].nextUrl]: data.next
+							}
+						});
+						console.log(this.state.store);
+					})
+					.catch(error => console.log(error));
+			}
 		}
 
 		render() {
