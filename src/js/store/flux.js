@@ -28,7 +28,23 @@ const getState = ({ getStore, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+
+            nuevaPagina: () => {
+                fetch("https://swapi.co/api/people/?page=2")
+					.then(resp => resp.json())
+					.then(data => {
+						this.setState({
+							store: {
+								...this.state.store,
+								[fetching[i].storePlace]: data.results,
+								[fetching[i].nextUrl]: data.next
+							}
+						});
+					})
+					.catch(error => console.log(error));
+
+            }
 		}
 	};
 };

@@ -38,7 +38,6 @@ const injectContext = PassedComponent => {
 								[fetching[i].nextUrl]: data.next
 							}
 						});
-						console.log(this.state.store);
 					})
 					.catch(error => console.log(error));
 			}

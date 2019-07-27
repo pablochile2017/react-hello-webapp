@@ -7,7 +7,9 @@ import "../../styles/home.scss";
 export class Home extends React.Component {
 	render() {
 		return (
+            
 			<div className="container">
+            <Context.Consumer>
 				<h1>Personajes</h1>
 				<table className="table table-hover table-responsive">
 					<thead>
@@ -15,7 +17,7 @@ export class Home extends React.Component {
 							<th scope="col">Name</th>
 						</tr>
 					</thead>
-					<Context.Consumer>
+					
 						{({ store, actions }) => {
 							if ("characters" in store) {
 								return store.characters.map((item, index) => {
@@ -32,7 +34,7 @@ export class Home extends React.Component {
 								});
 							}
 						}}
-					</Context.Consumer>
+					
 				</table>
 				<div className="row">
 					<div className="col-md-6">
@@ -45,12 +47,14 @@ export class Home extends React.Component {
 					<div className="col-md-6">
 						<button
 							className="btn btn-success btn-block m-2"
-							onClick={() => actions.changeColor(index, "orange")}>
+							onClick={() => actions.nuevaPagina(character, store.nextCharacter)}>
 							Siguiente
 						</button>
 					</div>
 				</div>
+                </Context.Consumer>
 			</div>
 		);
 	}
+    
 }
