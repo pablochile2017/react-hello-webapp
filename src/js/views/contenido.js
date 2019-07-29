@@ -26,7 +26,7 @@ export class Contenido extends React.Component {
 					<Context.Consumer>
 						{({ store, actions }) => {
 							let index = this.props.match.params.id;
-							if ("characters" in store) {
+							if ("characters" in store || "planets" in store || "vehicles" in store) {
 								return (
 									<tbody>
 										<tr>

@@ -28,23 +28,13 @@ export class Vehicles extends React.Component {
 					</thead>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							if ("vehicles" in store) {
+							if ("characters" in store || "planets" in store || "vehicles" in store) {
 								return store.vehicles.map((item, index) => {
 									return (
 										<tbody key={index}>
 											<tr>
 												<th scope="row" />
 												<td>{item.name}</td>
-												<td>{item.model}</td>
-												<td>{item.manufacturer}</td>
-												<td>{item.cost_in_credits}</td>
-												<td>{item.length}</td>
-												<td>{item.max_atmosphering_speed}</td>
-												<td>{item.crew}</td>
-												<td>{item.passengers}</td>
-												<td>{item.cargo_capacity}</td>
-												<td>{item.consumables}</td>
-												<td>{item.vehicle_class}</td>
 											</tr>
 										</tbody>
 									);

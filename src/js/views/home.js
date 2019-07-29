@@ -17,7 +17,7 @@ export class Home extends React.Component {
 					</thead>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							if ("characters" in store) {
+							if ("characters" in store || "planets" in store || "vehicles" in store) {
 								return store.characters.map((item, index) => {
 									return (
 										<tbody key={index}>
