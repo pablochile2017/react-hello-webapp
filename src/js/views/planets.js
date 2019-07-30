@@ -21,10 +21,10 @@ export class Planets extends React.Component {
 									return (
 										<tbody key={index}>
 											<tr>
-												<th scope="row" />
-												<td>
-													<Link to={"/planets/" + index}>{item.name}</Link>
-												</td>
+												<Link to={"/planets/" + index}>
+													<th scope="row" />
+													<td>{item.name}</td>
+												</Link>
 											</tr>
 										</tbody>
 									);
@@ -33,22 +33,52 @@ export class Planets extends React.Component {
 						}}
 					</Context.Consumer>
 				</table>
-				<div className="row">
-					<div className="col-md-6">
-						<button
-							className="btn btn-success btn-block m-2"
-							onClick={() => actions.changeColor(index, "orange")}>
-							Anterior
-						</button>
-					</div>
-					<div className="col-md-6">
-						<button
-							className="btn btn-success btn-block m-2"
-							onClick={() => actions.changeColor(index, "orange")}>
-							Siguiente
-						</button>
-					</div>
-				</div>
+				<Context.Consumer>
+					{({ store, actions }) => {
+						return (
+							<div className="row">
+								<div className="col-md-6">
+									<button
+										className={
+											"btn btn-success btn-block m-2 " +
+											(store.previousPlanets == null ? "disabled" : "")
+										}
+										onClick={() =>
+											actions.getFetch([
+												{
+													url: store.previousPlanets,
+													storePlace: "planets",
+													nextUrl: "nextPlanets",
+													prevUrl: "previousPlanets"
+												}
+											])
+										}>
+										Anterior
+									</button>
+								</div>
+								<div className="col-md-6">
+									<button
+										className={
+											"btn btn-success btn-block m-2" +
+											(store.nextCharacters == null ? "disabled" : "")
+										}
+										onClick={() =>
+											actions.getFetch([
+												{
+													url: store.nextPlanets,
+													storePlace: "planets",
+													nextUrl: "nextPlanets",
+													prevUrl: "previousPlanets"
+												}
+											])
+										}>
+										Siguiente
+									</button>
+								</div>
+							</div>
+						);
+					}}
+				</Context.Consumer>
 			</div>
 		);
 	}

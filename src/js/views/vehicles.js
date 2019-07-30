@@ -21,7 +21,7 @@ export class Vehicles extends React.Component {
 									return (
 										<tbody key={index}>
 											<tr>
-												<Link to={"/vehicles" + index}>
+												<Link to={"/vehicles/" + index}>
 													<th scope="row" />
 													<td>{item.name}</td>
 												</Link>
@@ -33,22 +33,52 @@ export class Vehicles extends React.Component {
 						}}
 					</Context.Consumer>
 				</table>
-				<div className="row">
-					<div className="col-md-6">
-						<button
-							className="btn btn-success btn-block m-2"
-							onClick={() => actions.changeColor(index, "orange")}>
-							Anterior
-						</button>
-					</div>
-					<div className="col-md-6">
-						<button
-							className="btn btn-success btn-block m-2"
-							onClick={() => actions.changeColor(index, "orange")}>
-							Siguiente
-						</button>
-					</div>
-				</div>
+				<Context.Consumer>
+					{({ store, actions }) => {
+						return (
+							<div className="row">
+								<div className="col-md-6">
+									<button
+										className={
+											"btn btn-success btn-block m-2 " +
+											(store.previousVehicles == null ? "disabled" : "")
+										}
+										onClick={() =>
+											actions.getFetch([
+												{
+													url: store.previousVehicles,
+													storePlace: "planets",
+													nextUrl: "nextPlanets",
+													prevUrl: "previousPlanets"
+												}
+											])
+										}>
+										Anterior
+									</button>
+								</div>
+								<div className="col-md-6">
+									<button
+										className={
+											"btn btn-success btn-block m-2" +
+											(store.nextVehicles == null ? "disabled" : "")
+										}
+										onClick={() =>
+											actions.getFetch([
+												{
+													url: store.nextVehicles,
+													storePlace: "planets",
+													nextUrl: "nextPlanets",
+													prevUrl: "previousPlanets"
+												}
+											])
+										}>
+										Siguiente
+									</button>
+								</div>
+							</div>
+						);
+					}}
+				</Context.Consumer>
 			</div>
 		);
 	}

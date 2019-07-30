@@ -42,6 +42,7 @@ const injectContext = PassedComponent => {
 					prevUrl: "previousPlanets"
 				}
 			];
+			this.state.actions.getFetch(fetching);
 		}
 
 		render() {

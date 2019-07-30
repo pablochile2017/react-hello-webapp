@@ -74,6 +74,33 @@ export class Contenido extends React.Component {
 									</table>
 								</div>
 							);
+						} else if (this.props.match.path.includes("/vehicles/") && store.vehicles[index] != undefined) {
+							return (
+								<div>
+									<h1>Vehicles</h1>
+									<table className="table table-hover table-responsive">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">Name</th>
+												<th scope="col">Height</th>
+												<th scope="col">Mass</th>
+												<th scope="col">Hair color</th>
+												<th scope="col">Skin color</th>
+												<th scope="col">Eye color</th>
+												<th scope="col">Birth year</th>
+												<th scope="col">Gender</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row" />
+												<td>{store.vehicles[index].name}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							);
 						}
 					}}
 				</Context.Consumer>
