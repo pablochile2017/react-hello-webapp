@@ -17,12 +17,12 @@ export class Home extends React.Component {
 					</thead>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							if ("characters" in store || "planets" in store || "vehicles" in store) {
+							if ("characters" in store) {
 								return store.characters.map((item, index) => {
 									return (
 										<tbody key={index}>
 											<tr>
-												<Link to={"/" + index}>
+												<Link to={"/characters/" + index}>
 													<th scope="row" />
 													<td>{item.name}</td>
 												</Link>
@@ -34,22 +34,52 @@ export class Home extends React.Component {
 						}}
 					</Context.Consumer>
 				</table>
-				<div className="row">
-					<div className="col-md-6">
-						<button
-							className="btn btn-success btn-block m-2"
-							onClick={() => actions.changeColor(index, "orange")}>
-							Anterior
-						</button>
-					</div>
-					<div className="col-md-6">
-						<button
-							className="btn btn-success btn-block m-2"
-							onClick={() => actions.changeColor(index, "orange")}>
-							Siguiente
-						</button>
-					</div>
-				</div>
+				<Context.Consumer>
+					{({ store, actions }) => {
+						return (
+							<div className="row">
+								<div className="col-md-6">
+									<button
+										className={
+											"btn btn-success btn-block m-2 " +
+											(store.previousCharacters == null ? "disabled" : "")
+										}
+										onClick={() =>
+											actions.getFetch([
+												{
+													url: store.previousCharacters,
+													storePlace: "characters",
+													nextUrl: "nextCharacters",
+													prevUrl: "previousCharacters"
+												}
+											])
+										}>
+										Anterior
+									</button>
+								</div>
+								<div className="col-md-6">
+									<button
+										className={
+											"btn btn-success btn-block m-2" +
+											(store.nextCharacters == null ? "disabled" : "")
+										}
+										onClick={() =>
+											actions.getFetch([
+												{
+													url: store.nextCharacters,
+													storePlace: "characters",
+													nextUrl: "nextCharacters",
+													prevUrl: "previousCharacters"
+												}
+											])
+										}>
+										Siguiente
+									</button>
+								</div>
+							</div>
+						);
+					}}
+				</Context.Consumer>
 			</div>
 		);
 	}

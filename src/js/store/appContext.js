@@ -23,25 +23,26 @@ const injectContext = PassedComponent => {
 
 		componentDidMount() {
 			const fetching = [
-				{ url: "https://swapi.co/api/people/?page=1", storePlace: "characters", nextUrl: "nextCharacters" },
-				{ url: "https://swapi.co/api/vehicles/?page=1", storePlace: "vehicles", nextUrl: "nextVehicles" },
-				{ url: "https://swapi.co/api/planets/?page=1", storePlace: "planets", nextUrl: "nextPlanets" }
+				{
+					url: "https://swapi.co/api/people/?page=1",
+					storePlace: "characters",
+					nextUrl: "nextCharacters",
+					prevUrl: "previousCharacters"
+				},
+				{
+					url: "https://swapi.co/api/vehicles/?page=1",
+					storePlace: "vehicles",
+					nextUrl: "nextVehicles",
+					prevUrl: "previousVehicles"
+				},
+				{
+					url: "https://swapi.co/api/planets/?page=1",
+					storePlace: "planets",
+					nextUrl: "nextPlanets",
+					prevUrl: "previousPlanets"
+				}
 			];
-			for (let i in fetching) {
-				fetch(fetching[i].url)
-					.then(resp => resp.json())
-					.then(data => {
-						this.setState({
-							store: {
-								...this.state.store,
-								[fetching[i].storePlace]: data.results,
-								[fetching[i].nextUrl]: data.next
-							}
-						});
-						console.log(this.state.store);
-					})
-					.catch(error => console.log(error));
-			}
+			this.state.actions.getFetch(fetching);
 		}
 
 		render() {
