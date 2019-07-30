@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 
@@ -12,16 +11,7 @@ export class Planets extends React.Component {
 				<table className="table table-hover table-responsive">
 					<thead>
 						<tr>
-							<th scope="col">#</th>
 							<th scope="col">Name</th>
-							<th scope="col">rotation_period</th>
-							<th scope="col">orbital_period</th>
-							<th scope="col">diameter</th>
-							<th scope="col">climate</th>
-							<th scope="col">gravity</th>
-							<th scope="col">terrain</th>
-							<th scope="col">surface_water</th>
-							<th scope="col">population</th>
 						</tr>
 					</thead>
 					<Context.Consumer>
@@ -32,15 +22,9 @@ export class Planets extends React.Component {
 										<tbody key={index}>
 											<tr>
 												<th scope="row" />
-												<td>{item.name}</td>
-												<td>{item.rotation_period}</td>
-												<td>{item.orbital_period}</td>
-												<td>{item.diameter}</td>
-												<td>{item.climate}</td>
-												<td>{item.gravity}</td>
-												<td>{item.terrain}</td>
-												<td>{item.surface_water}</td>
-												<td>{item.population}</td>
+												<td>
+													<Link to={"/planets/" + index}>{item.name}</Link>
+												</td>
 											</tr>
 										</tbody>
 									);
