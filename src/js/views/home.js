@@ -9,31 +9,29 @@ export class Home extends React.Component {
 		return (
 			<div className="container">
 				<h1>Personajes</h1>
-				<table className="table table-hover table-responsive">
-					<thead>
-						<tr>
-							<th scope="col">Name</th>
-						</tr>
-					</thead>
-					<Context.Consumer>
-						{({ store, actions }) => {
-							if ("characters" in store) {
-								return store.characters.map((item, index) => {
-									return (
-										<tbody key={index}>
-											<tr>
+				<div clasName="container">
+					<div className="row">
+						<Context.Consumer>
+							{({ store, actions }) => {
+								if ("characters" in store) {
+									return store.characters.map((item, index) => {
+										return (
+											<div className="col-md-3 mt-2 mb-2" key={index}>
 												<Link to={"/characters/" + index}>
-													<th scope="row" />
-													<td>{item.name}</td>
+													<div className="card">
+														<div className="card-body">
+															<h5 className="card-title">{item.name}</h5>
+														</div>
+													</div>
 												</Link>
-											</tr>
-										</tbody>
-									);
-								});
-							}
-						}}
-					</Context.Consumer>
-				</table>
+											</div>
+										);
+									});
+								}
+							}}
+						</Context.Consumer>
+					</div>
+				</div>
 				<Context.Consumer>
 					{({ store, actions }) => {
 						return (

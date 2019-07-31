@@ -8,31 +8,29 @@ export class Vehicles extends React.Component {
 		return (
 			<div className="container">
 				<h1>Vehicles</h1>
-				<table className="table table-hover table-responsive">
-					<thead>
-						<tr>
-							<th scope="col">Name</th>
-						</tr>
-					</thead>
-					<Context.Consumer>
-						{({ store, actions }) => {
-							if ("vehicles" in store) {
-								return store.vehicles.map((item, index) => {
-									return (
-										<tbody key={index}>
-											<tr>
+				<div clasName="container">
+					<div className="row">
+						<Context.Consumer>
+							{({ store, actions }) => {
+								if ("vehicles" in store) {
+									return store.vehicles.map((item, index) => {
+										return (
+											<div className="col-md-3 mt-2 mb-2" key={index}>
 												<Link to={"/vehicles/" + index}>
-													<th scope="row" />
-													<td>{item.name}</td>
+													<div className="card">
+														<div className="card-body">
+															<h5 className="card-title">{item.name}</h5>
+														</div>
+													</div>
 												</Link>
-											</tr>
-										</tbody>
-									);
-								});
-							}
-						}}
-					</Context.Consumer>
-				</table>
+											</div>
+										);
+									});
+								}
+							}}
+						</Context.Consumer>
+					</div>
+				</div>
 				<Context.Consumer>
 					{({ store, actions }) => {
 						return (
@@ -47,9 +45,9 @@ export class Vehicles extends React.Component {
 											actions.getFetch([
 												{
 													url: store.previousVehicles,
-													storePlace: "planets",
-													nextUrl: "nextPlanets",
-													prevUrl: "previousPlanets"
+													storePlace: "vehicles",
+													nextUrl: "nextVehicles",
+													prevUrl: "previousVehicles"
 												}
 											])
 										}>
@@ -66,9 +64,9 @@ export class Vehicles extends React.Component {
 											actions.getFetch([
 												{
 													url: store.nextVehicles,
-													storePlace: "planets",
-													nextUrl: "nextPlanets",
-													prevUrl: "previousPlanets"
+													storePlace: "vehicles",
+													nextUrl: "nextVehicles",
+													prevUrl: "previousVehicles"
 												}
 											])
 										}>
