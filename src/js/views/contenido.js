@@ -96,9 +96,6 @@ export class Contenido extends React.Component {
 													Superficie de Agua:
 													{store.planets[index].surface_water}
 												</li>
-												<li className="list-group-item">
-													Población: {store.planets[index].residents}
-												</li>
 											</ul>
 										</div>
 									</div>
